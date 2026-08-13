@@ -21,9 +21,9 @@ const certificationSchema = new mongoose.Schema({
         type: String, 
         required: true         
     },
-    certificateUrl: {  // ← ADD THIS FIELD
+    certificateUrl: {  
         type: String,
-        required: false // Not required for all certifications
+        required: false 
     },
     Affiliation: {
         type: String,

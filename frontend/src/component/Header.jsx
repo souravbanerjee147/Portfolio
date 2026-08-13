@@ -13,13 +13,13 @@ export default function Header({ currentTheme, onThemeChange }) {
     return () => document.removeEventListener("mousedown", closeMenu);
   }, []);
 
-  const DRIVE_LINK = "https://drive.google.com/file/d/14zxkZzwJrGUqEcmeXVy-1_kI9wuLK1qL/view?usp=drive_link";
+  const DRIVE_LINK = "https://drive.google.com/file/d/14zxkZzwJrGUqEcmeXVy-1_kI9wuLK1qL/view?usp=sharing";
 
   const navLinks = [
     { target: "#about", label: "About" },
     { target: "#projects", label: "Projects" },
-    { target: "#certification", label: "Certifications"},
-    { target: "#contact", label: "Contact"},
+    { target: "#certification", label: "Certifications" },
+    { target: "#contact", label: "Contact" },
     { target: DRIVE_LINK, label: "Resume", isExternal: true }
 
   ];
@@ -37,7 +37,7 @@ export default function Header({ currentTheme, onThemeChange }) {
         <ul className="hidden md:flex items-center space-x-1 justify-stretch lg:space-x-2 font-medium text-sm">
           {navLinks.map((link) => (
             <li key={link.target}>
-              <a 
+              <a
                 href={link.target}
                 target={link.isExternal ? "_blank" : "_self"}
                 rel={link.isExternal ? "noreferrer" : undefined}
@@ -63,10 +63,10 @@ export default function Header({ currentTheme, onThemeChange }) {
           ))}
         </div>
 
-        {/* MOBILE RESPONSIVE HAMBURGER */}
+        {/* MOBILE / TABLET RESPONSIVE HAMBURGER MENU */}
         <div className="lg:hidden relative" ref={menuRef}>
-          <button 
-            onClick={() => setMenuOpen(!menuOpen)} 
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
             className="p-2 border border-[var(--border)] rounded-lg text-lg hover:bg-[var(--code-bg)] transition h-10 w-10 flex items-center justify-center cursor-pointer text-[var(--text-h)]"
           >
             <i className={`bi ${menuOpen ? 'bi-x-lg text-sm' : 'bi-three-dots'}`}></i>
@@ -74,28 +74,42 @@ export default function Header({ currentTheme, onThemeChange }) {
 
           {menuOpen && (
             <div className="absolute right-0 top-12 w-48 rounded-xl bg-[var(--bg)] p-1.5 shadow-xl border border-[var(--border)] text-left animate-in fade-in slide-in-from-top-2 duration-150">
-              {navLinks.map((link) => (
-                <a 
-                  key={link.target} 
-                  href={link.target}
-                  target={link.isExternal ? "_blank" : "_self"}
-                  rel={link.isExternal ? "noreferrer" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[var(--code-bg)] hover:text-[var(--text-h)] transition"
-                >
-                  <i className={`bi ${link.icon} text-gray-400`}></i> {link.label}
-                </a>
-              ))}
-              <div className="border-t border-[var(--border)] my-1.5 pt-1.5 px-3">
+
+              {/* NAV LINKS: Only visible in panel on screens BELOW 768px (md:hidden) */}
+              <div className="md:hidden">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.target}
+                    href={link.target}
+                    target={link.isExternal ? "_blank" : "_self"}
+                    rel={link.isExternal ? "noreferrer" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[var(--code-bg)] hover:text-[var(--text-h)] transition"
+                  >
+                    <i className={`bi ${link.icon} text-gray-400`}></i> {link.label}
+                  </a>
+                ))}
+              </div>
+
+              {/* DISPLAY MODE SWITCHER: Always visible inside panel when opened */}
+              <div className="border-t md:border-t-0 border-[var(--border)] my-1.5 md:my-0 pt-1.5 md:pt-0 px-3">
                 <p className="text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-1.5">Display Mode</p>
                 <div className="grid grid-cols-3 gap-1 bg-[var(--code-bg)] p-0.5 rounded-lg text-center text-[11px] font-bold">
                   {["light", "dark", "system"].map((t) => (
-                    <button key={t} onClick={() => onThemeChange(t)} className={`py-1 rounded capitalize cursor-pointer ${currentTheme === t ? 'bg-[var(--bg)] text-[var(--accent)] font-extrabold shadow-xs' : 'text-gray-400'}`}>
+                    <button
+                      key={t}
+                      onClick={() => onThemeChange(t)}
+                      className={`py-1 rounded capitalize cursor-pointer ${currentTheme === t
+                          ? "bg-[var(--bg)] text-[var(--accent)] font-extrabold shadow-xs"
+                          : "text-gray-400"
+                        }`}
+                    >
                       {t === "system" ? "Sys" : t}
                     </button>
                   ))}
                 </div>
               </div>
+
             </div>
           )}
         </div>

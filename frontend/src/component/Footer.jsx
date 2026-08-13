@@ -1,6 +1,3 @@
-// Footer.jsx
-
-
 
 // frontend/src/component/Footer.jsx
 import React from 'react';

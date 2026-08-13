@@ -1,10 +1,10 @@
 //  contact.Route.js
 
-import express from 'express';
-import { sendContactEmail } from '../controllers/contact.Controller.js';
+// import express from 'express';
+// import { sendContactEmail } from '../controllers/contact.Controller.js';
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post('/', sendContactEmail);
+// router.post('/', sendContactEmail);
 
-export default router;
+// export default router;
